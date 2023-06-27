@@ -1,0 +1,49 @@
+# Gradle files
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Log/OS Files
+*.log
+
+# Android Studio generated files and folders
+captures/
+.externalNativeBuild/
+.cxx/
+*.apk
+output.json
+
+# IntelliJ
+*.iml
+.fleet
+.idea/
+misc.xml
+deploymentTargetDropDown.xml
+render.experimental.xml
+
+# Keystore files
+*.jks
+*.keystore
+
+# Google Services (e.g. APIs or Firebase)
+google-services.json
+
+# Android Profiling
+*.hprof
+*.env
+whatsnew/
+
+# Android secrets
+flexx-android/src/main/res/values/secrets.xml
+flexx-ios/keys.json
+
+# Mac files
+.DS_Store
+
+# Visual Studio Code
+.vscode
+
+# Residue file prior to using a workspace 
+flexx-ios/Flexx.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
