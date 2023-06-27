@@ -7,41 +7,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 open class RootViewModel : KMMViewModel() {
     @NativeCoroutinesState
-    val groups: MutableStateFlow<List<Group>> = MutableStateFlow(viewModelScope, emptyList())
-
-    fun load() {
-        groups.value = listOf(
-            Group(
-                "Group 1", listOf(
-                    GroupItemViewModel("Item 1"),
-                    GroupItemViewModel("Item 2"),
-                    GroupItemViewModel("Item 3")
-                )
-            ),
-            Group(
-                "Group 2", listOf(
-                    GroupItemViewModel("Item 1"),
-                    GroupItemViewModel("Item 2"),
-                    GroupItemViewModel("Item 3")
-                )
-            ),
-            Group(
-                "Group 3", listOf(
-                    GroupItemViewModel("Item 1"),
-                    GroupItemViewModel("Item 2"),
-                    GroupItemViewModel("Item 3")
-                )
-            )
-        )
-    }
+    val childViewModel: MutableStateFlow<ChildViewModel> = MutableStateFlow(viewModelScope, ChildViewModel("Child"))
 }
 
-data class Group(
-    val name: String,
-    val groupItemViewModels: List<GroupItemViewModel>
-)
-
-open class GroupItemViewModel(name: String) : KMMViewModel() {
+open class ChildViewModel(name: String) : KMMViewModel() {
     @NativeCoroutinesState
     val name: MutableStateFlow<String> = MutableStateFlow(viewModelScope, name)
 }

@@ -4,46 +4,29 @@ import shared
 
 struct RootScreen: View {
     @StateViewModel var viewModel = RootViewModel()
-    var body: some View {
-        Button("Load") {
-            viewModel.load()
-        }
-
-        Divider()
-
-        ForEach(viewModel.groups, id: \.name) { group in
-            GroupView(name: group.name, viewModels: group.groupItemViewModels)
-        }
-    }
-}
-
-struct GroupView: View {
-    let name: String
-    let viewModels: [GroupItemViewModel]
     @State private var isExpanded: Bool = true
 
     var body: some View {
         HStack {
-            Text(name)
-            Button(action: {
-                isExpanded.toggle()
-            }, label: {
-                Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
-            })
-        }
-        if (isExpanded) {
-            ForEach(viewModels, id: \.name) { groupItemViewModel in
-                GroupItemView(groupItemViewModel)
+            Button(
+                action: { isExpanded.toggle() },
+                label: { Image(systemName: isExpanded ? "chevron.right" : "chevron.left") }
+            )
+
+            if (isExpanded) {
+                ChildView(viewModel: viewModel.childViewModel)
             }
+
+            Spacer()
         }
-        Divider()
+        .padding()
     }
 }
 
-struct GroupItemView: View {
-    @ObservedViewModel var viewModel: GroupItemViewModel
+struct ChildView: View {
+    @ObservedViewModel var viewModel: ChildViewModel
 
-    init(_ viewModel: GroupItemViewModel) {
+    init(viewModel: ChildViewModel) {
         _viewModel = ObservedViewModel(wrappedValue: viewModel)
     }
 
