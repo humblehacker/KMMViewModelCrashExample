@@ -6,7 +6,42 @@ import com.rickclephas.kmp.nativecoroutines.NativeCoroutinesState
 import kotlinx.coroutines.flow.MutableStateFlow
 
 open class RootViewModel : KMMViewModel() {
-    @Suppress("Unused")
     @NativeCoroutinesState
-    val text: MutableStateFlow<String> = MutableStateFlow(viewModelScope, "Hello World!")
+    val groups: MutableStateFlow<List<Group>> = MutableStateFlow(viewModelScope, emptyList())
+
+    fun load() {
+        groups.value = listOf(
+            Group(
+                "Group 1", listOf(
+                    GroupItemViewModel("Item 1"),
+                    GroupItemViewModel("Item 2"),
+                    GroupItemViewModel("Item 3")
+                )
+            ),
+            Group(
+                "Group 2", listOf(
+                    GroupItemViewModel("Item 1"),
+                    GroupItemViewModel("Item 2"),
+                    GroupItemViewModel("Item 3")
+                )
+            ),
+            Group(
+                "Group 3", listOf(
+                    GroupItemViewModel("Item 1"),
+                    GroupItemViewModel("Item 2"),
+                    GroupItemViewModel("Item 3")
+                )
+            )
+        )
+    }
+}
+
+data class Group(
+    val name: String,
+    val groupItemViewModels: List<GroupItemViewModel>
+)
+
+open class GroupItemViewModel(name: String) : KMMViewModel() {
+    @NativeCoroutinesState
+    val name: MutableStateFlow<String> = MutableStateFlow(viewModelScope, name)
 }
